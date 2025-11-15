@@ -47,7 +47,7 @@ prompt = [
     "*Question*: \"How many student records are present?\"",
     "**SQL Query**: SELECT COUNT(*) FROM STUDENT;",
     "*Question*: \"List all students in the Data Science class.\"",
-    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = \"Data Science\";"
+    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = \'Data Science\';"
 ]
 
 
