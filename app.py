@@ -11,7 +11,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 def get_gemini_response(question,prompt):
-    model=genai.GenerativeModel('gemini-1.5-pro')
+    model=genai.GenerativeModel('gemini-2.5-pro')
     response=model.generate_content([prompt[0],question])
     return response.text
 
