@@ -18,12 +18,7 @@ def get_gemini_response(question,prompt):
 def read_sql_query(sql, db):
     conn = sqlite3.connect(db)
     cur = conn.cursor()
-    try:
-        cur.execute(sql)
-    except sqlite3.OperationalError as e:
-        st.error(f"SQL Error: {e}")
-        conn.close()
-        return []
+    cur.execute(sql)
     
     rows = cur.fetchall()
     conn.commit()
