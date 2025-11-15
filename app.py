@@ -13,7 +13,13 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def get_gemini_response(question,prompt):
     model=genai.GenerativeModel('gemini-2.5-pro')
     response=model.generate_content([prompt[0],question])
-    return response.text
+    raw_text = response.text.strip()
+    if raw_text.startswith('```sql'):
+        query = raw_text.split('```sql')[1].strip()
+        if query.endswith('```'):
+            query = query[:-3].strip()
+        return query.strip()
+    return raw_text
 
 def read_sql_query(sql, db):
     conn = sqlite3.connect(db)
@@ -29,7 +35,7 @@ def read_sql_query(sql, db):
 
 
 prompt = [
-    "You are an expert AI assistant specializing in converting natural language questions into SQL queries.",
+    "You are an expert AI assistant specializing in converting natural language questions into SQL queries. **You must only output a single, executable SQL query and nothing else.**",
     "The SQL database is named STUDENT and contains the following columns:",
     "**NAME** (VARCHAR), **CLASS** (VARCHAR), **SECTION** (VARCHAR), **MARK** (INT)",
     "Follow these guidelines when generating SQL queries:",
