@@ -11,8 +11,8 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 def get_gemini_response(question,prompt):
-    model=genai.GenerativeModel('models/gemibi-1.5-pro')
-    response=model.generate_content([prompt[0],question])
+    model=genai.GenerativeModel('models/gemini-1.5-pro')
+    response = model.generate_content(prompt + [question])
     return response.text
 
 def read_sql_query(sql,db):
