@@ -29,18 +29,19 @@ def read_sql_query(sql,db):
 prompt = [
     "You are an expert AI assistant specializing in converting natural language questions into SQL queries.",
     "The SQL database is named STUDENT and contains the following columns:",
-    "**NAME** (VARCHAR), **CLASS** (VARCHAR), **SECTION** (VARCHAR), **MARKS** (INT)",
+    "**NAME** (VARCHAR), **CLASS** (VARCHAR), **SECTION** (VARCHAR), **MARK** (INT)",
     "Follow these guidelines when generating SQL queries:",
     "1. Ensure the output contains only the SQL query — do not include explanations, formatting, or markdown.",
     "2. Use proper SQL syntax while maintaining accuracy and efficiency.",
-    "3. If the query involves filtering, apply appropriate WHERE clauses.",
+    "3. If the query involves filtering, apply appropriate WHERE clauses using single quotes for string values.",
     "4. If an aggregation is required (counting records, averaging values), use SQL functions.",
     "#### Examples",
     "*Question*: \"How many student records are present?\"",
     "**SQL Query**: SELECT COUNT(*) FROM STUDENT;",
-    "*Question*: \"List all students in the Data Science class.\"",
-    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = \"Data Science\";"
+    "*Question*: \"List all students in the 10A class.\"",
+    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = '10A';"
 ]
+
 
 st.set_page_config(page_title="SQL Query Generator | Edureka")
 st.markdown("Your AI-Powered SQL generator")
