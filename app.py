@@ -15,16 +15,23 @@ def get_gemini_response(question,prompt):
     response=model.generate_content([prompt[0],question])
     return response.text
 
-def read_sql_query(sql,db):
-    conn=sqlite3.connect(db)
-    cur=conn.cursor()
-    cur.execute(sql)
-    rows=cur.fetchall()
+def read_sql_query(sql, db):
+    conn = sqlite3.connect(db)
+    cur = conn.cursor()
+    try:
+        cur.execute(sql)
+    except sqlite3.OperationalError as e:
+        st.error(f"SQL Error: {e}")
+        conn.close()
+        return []
+    
+    rows = cur.fetchall()
     conn.commit()
     conn.close()
     for row in rows:
         print(row)
     return rows
+
 
 prompt = [
     "You are an expert AI assistant specializing in converting natural language questions into SQL queries.",
@@ -33,13 +40,14 @@ prompt = [
     "Follow these guidelines when generating SQL queries:",
     "1. Ensure the output contains only the SQL query — do not include explanations, formatting, or markdown.",
     "2. Use proper SQL syntax while maintaining accuracy and efficiency.",
-    "3. If the query involves filtering, apply appropriate WHERE clauses using single quotes for string values.",
+    "3. If the query involves filtering, always wrap string values in single quotes, e.g., WHERE NAME = 'John'.",
     "4. If an aggregation is required (counting records, averaging values), use SQL functions.",
     "#### Examples",
     "*Question*: \"How many student records are present?\"",
     "**SQL Query**: SELECT COUNT(*) FROM STUDENT;",
     "*Question*: \"List all students in the 10A class.\"",
-    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = '10A';"
+    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = '10A';",
+    "IMPORTANT: All string values in SQL must be enclosed in single quotes. Do NOT return unquoted strings."
 ]
 
 
