@@ -37,11 +37,12 @@ prompt = [
     "2. Use proper SQL syntax while maintaining accuracy and efficiency.",
     "3. If the query involves filtering, apply appropriate WHERE clauses.",
     "4. If an aggregation is required (counting records, averaging values), use SQL functions.",
+    "5. Ensure that all string/text values in WHERE clauses or other comparisons are enclosed in **single quotes** (').",
     "#### Examples",
     "*Question*: \"How many student records are present?\"",
     "**SQL Query**: SELECT COUNT(*) FROM STUDENT;",
     "*Question*: \"List all students in class 10A.\"",
-    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = '10A';",
+    "**SQL Query**: SELECT * FROM STUDENT WHERE CLASS = **'10A'**;",
     "*Question*: \"Who scored more than 90 marks?\"",
     "**SQL Query**: SELECT * FROM STUDENT WHERE MARK > 90;"
 ]
