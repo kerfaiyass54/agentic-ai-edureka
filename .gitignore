@@ -1,0 +1,47 @@
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+*.log
+
+# Virtual environments
+env/
+venv/
+.venv/
+*/venv/
+*/env/
+*.conda
+*.env
+
+# Conda Environment
+# (environment.yml is OK to commit, but NEVER the env folder)
+conda-meta/
+*.sqlite
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dll
+*.a
+*.o
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
